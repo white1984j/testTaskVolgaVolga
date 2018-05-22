@@ -1,5 +1,4 @@
-const initialState = {};
-
-export default (state = initialState, action) => {
+export default (state = {}, action) => {
+  console.log(state);
 	return state;
 }
