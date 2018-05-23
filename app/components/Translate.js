@@ -9,13 +9,15 @@ import {
   Picker
 } from 'react-native';
 
+import {reqTranslate} from '../actions'
+
 class Translate extends Component{
   constructor(props){
     super(props);
     this.state = {
       translateInput: "",
       translateOutput: "",
-      language: "English"
+      language: "en"
     }
     this.onChange = this.onChange.bind(this);
   }
@@ -25,7 +27,8 @@ class Translate extends Component{
     })
   }
   onSubmit = () => {
-    Alert.alert( this.state.translateInput );
+    const {translateInput, language} = this.state;
+    this.props.reqTranslate( translateInput, language );
   }
   render() {
     return (
@@ -38,20 +41,22 @@ class Translate extends Component{
         <Picker
           selectedValue={this.state.language}
           onValueChange={(itemValue, itemIndex) => this.setState({language: itemValue})} >
-          <Picker.Item label="English" value="eng" />
-          <Picker.Item label="Italian" value="ita" />
-          <Picker.Item label="Spanish" value="spa" />
+          <Picker.Item label="English" value="en" />
+          <Picker.Item label="Italian" value="it" />
+          <Picker.Item label="Spanish" value="es" />
         </Picker>
-        <TextInput
-          style={{height: 40, color: '#000'}}
-          value={this.state.translateOutput}
-          placeholder="Перевод"
-          editable={false}
-        />
         <Button
           onPress={this.onSubmit}
           title="Перевести"
         />
+        {this.props.translate.error ?
+          <Text>Призошла ошибка</Text>
+          : <TextInput
+          style={{height: 40, color: '#000'}}
+          value={this.props.translate.text}
+          placeholder="Перевод"
+          editable={false}
+        />}
       </View>
     );
   }
@@ -59,4 +64,8 @@ class Translate extends Component{
 
 const mapStateToProps = (state) => ({translate: state.translate})
 
-export default connect(mapStateToProps)(Translate);
+const mapDispatchToProps = (dispatch) => ({
+  reqTranslate: (text, lang) => dispatch(reqTranslate(text, lang))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Translate);
