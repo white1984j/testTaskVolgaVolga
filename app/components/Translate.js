@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {
+  StyleSheet,
   Text,
   View,
   Button,
-  Alert,
   TextInput,
   Picker
 } from 'react-native';
@@ -32,7 +32,7 @@ class Translate extends Component{
   }
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <TextInput
           style={{height: 40}}
           onChange={ (event) => this.onChange(event.nativeEvent.text) }
@@ -50,7 +50,7 @@ class Translate extends Component{
           title="Перевести"
         />
         {this.props.translate.error ?
-          <Text>Призошла ошибка</Text>
+          <Text style={styles.error} >Призошла ошибка</Text>
           : <TextInput
           style={{height: 40, color: '#000'}}
           value={this.props.translate.text}
@@ -61,6 +61,18 @@ class Translate extends Component{
     );
   }
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 40
+  },
+  error: {
+    fontSize: 18,
+    color: 'red',
+  }
+});
 
 const mapStateToProps = (state) => ({translate: state.translate})
 
