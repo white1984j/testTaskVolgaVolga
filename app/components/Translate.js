@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
 import {
   StyleSheet,
   Text,
@@ -9,7 +9,8 @@ import {
   Picker
 } from 'react-native';
 
-import {reqTranslate} from '../actions'
+
+import {reqTranslate} from '../actions';
 
 class Translate extends Component{
   constructor(props){
@@ -17,7 +18,7 @@ class Translate extends Component{
     this.state = {
       translateInput: "",
       translateOutput: "",
-      language: "en"
+      language: "en",
     }
     this.onChange = this.onChange.bind(this);
   }
@@ -33,6 +34,7 @@ class Translate extends Component{
   render() {
     return (
       <View style={styles.container}>
+        
         <TextInput
           style={{height: 40}}
           onChange={ (event) => this.onChange(event.nativeEvent.text) }
@@ -74,10 +76,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state) => ({translate: state.translate})
+const mapStateToProps = (state) => ({translate: state.translate});
 
 const mapDispatchToProps = (dispatch) => ({
   reqTranslate: (text, lang) => dispatch(reqTranslate(text, lang))
-})
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Translate);
