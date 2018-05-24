@@ -3,8 +3,10 @@ import { createBottomTabNavigator,StackNavigator, TabNavigator, TabBarBottom } f
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
-import Translate from './Translate'
-import Vk from './Vk'
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import Translate from './Translate';
+import Vk from './Vk';
 
 
 
@@ -14,6 +16,29 @@ export default createBottomTabNavigator(
     Vk: Vk,
   },
   {
-    /* Other configuration remains unchanged */
+    navigationOptions: ({ navigation }) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        let iconName;
+        if (routeName === 'Translate') {
+          iconName = 'language';
+        } else if (routeName === 'Vk') {
+          iconName = 'vk';
+        }
+
+        return <Icon name={iconName} size={24} color="#fff" />;
+      },
+    }),
+    tabBarOptions: {
+      activeTintColor: '#fff',
+      inactiveTintColor: '#c3c3c3',
+      labelStyle: {
+        fontSize: 16
+      },
+      style: {
+        paddingTop: 4,
+        backgroundColor: '#5181b8',
+      },
+    }
   }
 );
