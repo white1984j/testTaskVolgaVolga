@@ -10,6 +10,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import BarcodeListItem from './BarcodeListItem';
+
 
 const styles = StyleSheet.create({
   BarcodeListItem: {
@@ -79,6 +81,38 @@ class BarcodeList extends Component {
     }
   }
 
+  onDelete = (id) => {
+    const barcodeListFiltered = this.state.barcode.filter( barcode => barcode.id !== id )
+    this.setState((prevState, props) => {
+      return {barcode: barcodeListFiltered};
+    }); 
+    try {
+      AsyncStorage.setItem('Barcodes', JSON.stringify(barcodeListFiltered) );
+    }catch (error){
+      console.log('setValues', error)
+    }
+  }
+
+  onEdit = (id, text) => {
+    console.log(id, text);
+    try {
+      const barcodeListFiltered = this.state.barcode.map( barcode => {
+        if( String(barcode.id) === String(id) )
+          return {id: barcode.id, text: text};
+        return barcode;
+      });
+      console.log( barcodeListFiltered );
+      this.setState((prevState, props) => {
+        return {barcode: barcodeListFiltered};
+      }); 
+    
+      AsyncStorage.setItem('Barcodes', JSON.stringify(barcodeListFiltered) );
+    }catch (error){
+      console.log('setValues', error)
+    }
+  }
+
+
   componentDidMount(){
     this.getValues();
   }
@@ -98,8 +132,6 @@ class BarcodeList extends Component {
   }
 
   render() {
-    console.log('render barcodelist');
-    //console.log('this', this);
 
     const getBody = () => {
       if( this.state.barcode.length ){
@@ -107,17 +139,7 @@ class BarcodeList extends Component {
           data={ this.state.barcode }
           keyExtractor={item => item.id}
           renderItem={({item}) => {
-            return <View style={styles.BarcodeListItem}>
-              <Text style={styles.BarcodeListText}>{item.text}</Text>
-              <View style={styles.BarcodeListBtnWrap}>
-                <TouchableOpacity style={styles.BarcodeListBtn}>
-                  <Icon name="edit" size={24} color="#000" />
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.BarcodeListBtn}>
-                  <Icon name="trash-o" size={24} color="#000"  />
-                </TouchableOpacity>
-              </View>
-            </View>
+            return <BarcodeListItem text={item.text} id={item.id} onDelete={this.onDelete.bind(null, item.id)} onEdit={this.onEdit} />
           }}
         />
       }else{
