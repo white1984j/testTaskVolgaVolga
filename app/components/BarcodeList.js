@@ -85,7 +85,7 @@ class BarcodeList extends Component {
 
   getValues = async () => {
     try {
-      //await AsyncStorage.clear();
+      // await AsyncStorage.clear();
       const value = await AsyncStorage.getItem('Barcodes');
       if (value !== null ){
         this.setState((prevState, props) => {
@@ -128,10 +128,10 @@ class BarcodeList extends Component {
     return (
       <View >
         {getBody()}
-        <Button
+{/*        <Button
           title="Go to Details"
           onPress={() => this.props.navigation.navigate('BarcodeCamera')}
-        />
+        />*/}
       </View>
     );
   }
