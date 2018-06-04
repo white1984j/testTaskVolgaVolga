@@ -2,12 +2,11 @@ import {
   START,
   SUCCESS,
   FAILURE,
-  REQTRANSLATE
+  REQTRANSLATE,
+  GETBARCODES
 } from '../constants'
 
 export function reqTranslate(text, lang){
-  console.log(text,lang);
-  console.log( `https://translate.yandex.net/api/v1.5/tr.json/translate?key=trnsl.1.1.20180523T071314Z.226dc8a1cf6ad35b.82e1f69c554677407db73b936d4bca7c2ebe6b2e&text=${text}&lang=${lang}-ru` )
   return (dispatch) => {
     dispatch({
       type: REQTRANSLATE+START
