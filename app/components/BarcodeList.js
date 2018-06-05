@@ -6,14 +6,21 @@ import {
   Button,
   AsyncStorage,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView,
+  Animated,
+  Easing
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import BarcodeListItem from './BarcodeListItem';
+import LottieView from 'lottie-react-native';
 
 
 const styles = StyleSheet.create({
+  wrap: {
+    flex: 1
+  },
   BarcodeListItem: {
     display: 'flex',
     flexDirection: 'row',
@@ -34,6 +41,10 @@ const styles = StyleSheet.create({
   },
   BarcodeHeaderCamera: {
     padding: 8
+  },
+  TextEmpty: {
+    margin: 8,
+    fontWeight: 'bold'
   }
 })
 
@@ -42,7 +53,9 @@ class BarcodeList extends Component {
     super(props);
     this.state = {
       lastBarcode: {id: '', text: ''},
-      barcode: []
+      barcode: [],
+      progress: new Animated.Value(0),
+      animIsPlaying: false
     }
     this.getValues();
   }
@@ -65,7 +78,6 @@ class BarcodeList extends Component {
     const { navigation } = props;
     const id = navigation.getParam('id');
     const text = navigation.getParam('text');
-    console.log('getDerivedStateFromProps', state);
     if( !id || !text || ( state.lastBarcode.id === id && state.lastBarcode.text === text ) )
       return null;
     else{
@@ -94,14 +106,12 @@ class BarcodeList extends Component {
   }
 
   onEdit = (id, text) => {
-    console.log(id, text);
     try {
       const barcodeListFiltered = this.state.barcode.map( barcode => {
         if( String(barcode.id) === String(id) )
           return {id: barcode.id, text: text};
         return barcode;
       });
-      console.log( barcodeListFiltered );
       this.setState((prevState, props) => {
         return {barcode: barcodeListFiltered};
       }); 
@@ -131,29 +141,59 @@ class BarcodeList extends Component {
     }
   }
 
+  deteleAll = () => {
+    this.setState( prevState => ({
+      animIsPlaying: true
+    }));
+    Animated.timing(this.state.progress, {
+      toValue: 1,
+      duration: 5000,
+      easing: Easing.linear,
+    }).start(({ finished }) => {
+      if (finished) {
+        this.setState( prevState => ({
+          animIsPlaying: false,
+          progress: new Animated.Value(0),
+          lastBarcode: {id: '', text: ''},
+          barcode: [],
+        }))
+      }
+    });
+    try {
+      AsyncStorage.clear('Barcodes');
+    }catch (error){
+      console.log(error);
+    }
+  }
+
   render() {
 
     const getBody = () => {
       if( this.state.barcode.length ){
-        return <FlatList
-          data={ this.state.barcode }
-          keyExtractor={item => item.id}
-          renderItem={({item}) => {
-            return <BarcodeListItem text={item.text} id={item.id} onDelete={this.onDelete.bind(null, item.id)} onEdit={this.onEdit} />
-          }}
-        />
+        if( this.state.animIsPlaying )
+          return <LottieView source={require('./success.json')} progress={this.state.progress} />
+        return <ScrollView>
+          <FlatList
+            data={ this.state.barcode }
+            keyExtractor={item => item.id}
+            renderItem={({item}) => {
+              return <BarcodeListItem text={item.text} id={item.id} onDelete={this.onDelete.bind(null, item.id)} onEdit={this.onEdit} />
+            }}
+          />
+          <Button
+            title="Очистить весь список"
+            onPress={this.deteleAll}
+          />
+        </ScrollView>
       }else{
-        return <Text>Пусто</Text>
+        return <Text style={styles.TextEmpty}>Пусто</Text>
       }
     };
 
     return (
-      <View >
+      <View style={styles.wrap}>
         {getBody()}
-{/*        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate('BarcodeCamera')}
-        />*/}
+        
       </View>
     );
   }
