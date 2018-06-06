@@ -21,7 +21,7 @@ export default createBottomTabNavigator(
   {
     Translate: Translate,
     Vk: Vk,
-    Barcode: { screen: Barcode }
+    Barcode: Barcode
   },
   {
     navigationOptions: ({ navigation }) => ({
