@@ -8,12 +8,16 @@ import {
 
 import Camera from 'react-native-camera';
 
+import Sound from 'react-native-sound';
+
+
 export default class BarcodeScan extends Component {
   constructor(props){
     super(props);
     this.state = {
       status: true
     }
+    Sound.setCategory('Playback', true);
   }
 
   static navigationOptions = {
@@ -23,21 +27,33 @@ export default class BarcodeScan extends Component {
   onBarCodeRead = (e) => {
     if( !this.state.status )
       return false;
-    Vibration.vibrate(200);
-    console.log( this.state.status );
-    this.props.navigation.navigate('Barcode', {
-      id: String(new Date().getTime()),
-      text: e.data,
-    });
 
-    this.setState( (prevState) => {
-      return {status: false};
-    })
-    setTimeout( () => {
-      this.setState( (prevState) => {
-        return {status: true};
-      })
-    }, 2000)
+    this.setState({status: false});
+
+    const callback = (error, sound) => {
+      if (error) {
+        console.log('error');
+      }
+      // Run optional pre-play callback
+      sound.play(() => {
+        // Success counts as getting to the end
+        console.log('play');
+        // Release when it's done so we're not using up resources
+        Vibration.vibrate(200);
+        console.log( this.state.status );
+        this.props.navigation.navigate('Barcode', {
+          id: String(new Date().getTime()),
+          text: e.data,
+        });
+
+        setTimeout( () => {
+          this.setState({status: true})
+        }, 2000)
+      });
+    };
+    // If the audio is a 'require' then the second parameter must be the callback.
+    const sound = new Sound(require('../sounds/soundCamera.mp3'), error => callback(error, sound));
+     
   }
 
   render () {
