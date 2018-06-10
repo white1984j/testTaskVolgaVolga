@@ -21,16 +21,16 @@ class Translate extends Component{
       language: "en",
     }
     this.onChange = this.onChange.bind(this);
-  }
+  };
   onChange = (value) => {
     this.setState( () => {
       return { translateInput: value }
     })
-  }
+  };
   onSubmit = () => {
     const {translateInput, language} = this.state;
     this.props.reqTranslate( translateInput, language );
-  }
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -61,7 +61,7 @@ class Translate extends Component{
         />}
       </View>
     );
-  }
+  };
 };
 
 const styles = StyleSheet.create({

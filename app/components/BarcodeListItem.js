@@ -18,18 +18,20 @@ class BarcodeListItem extends Component{
 			edit: false,
 			text: this.props.text
 		}
-	}
+	};
 
 	onEdit = () => {
 		if( this.state.edit )
 			this.props.onEdit( this.props.id, this.state.text );
 		this.setState( prevState => ({ edit: !prevState.edit }) );
-	}
+	};
 
 	render(){
 		console.log('render list', this.state);
 		return( <View style={styles.BarcodeListItem}>
-        { this.state.edit ? <TextInput style={styles.BarcodeListText} onChangeText={(text) => this.setState({text: text})} >{this.state.text}</TextInput> : <Text style={styles.BarcodeListText}>{this.state.text}</Text> }
+        { this.state.edit 
+          ? <TextInput style={styles.BarcodeListText} onChangeText={(text) => this.setState({text: text})} >{this.state.text}</TextInput>
+          : <Text style={styles.BarcodeListText}>{this.state.text}</Text> }
         <View style={styles.BarcodeListBtnWrap}>
           <TouchableOpacity style={styles.BarcodeListBtn} onPress={ this.onEdit }  >
             <Icon name={ this.state.edit ? 'save' : 'edit' } size={24} color="#000" />
@@ -40,12 +42,11 @@ class BarcodeListItem extends Component{
         </View>
       </View>
 		)
-	}
+	};
 };
 
 const styles = StyleSheet.create({
   BarcodeListItem: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -56,7 +57,6 @@ const styles = StyleSheet.create({
     marginLeft: 8
   },
   BarcodeListBtnWrap: {
-    display: 'flex',
     flexDirection: 'row'
   },
   BarcodeListBtn: {

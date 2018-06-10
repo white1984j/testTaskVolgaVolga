@@ -175,7 +175,7 @@ class Vk extends Component{
         </View>
       </ScrollView>
     )   
-  }
+  };
 }
 
 const styles = StyleSheet.create({

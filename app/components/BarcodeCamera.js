@@ -18,7 +18,7 @@ export default class BarcodeScan extends Component {
       status: true
     }
     Sound.setCategory('Playback', true);
-  }
+  };
 
   static navigationOptions = {
     title: 'Вернуться к списку',
@@ -54,7 +54,7 @@ export default class BarcodeScan extends Component {
     // If the audio is a 'require' then the second parameter must be the callback.
     const sound = new Sound(require('../sounds/soundCamera.mp3'), error => callback(error, sound));
      
-  }
+  };
 
   render () {
     return (
@@ -67,7 +67,7 @@ export default class BarcodeScan extends Component {
           />
       </View>
     )
-  }
+  };
 }
 
 const styles = StyleSheet.create({

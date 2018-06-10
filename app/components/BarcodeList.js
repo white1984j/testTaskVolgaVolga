@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   BarcodeListItem: {
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
@@ -33,7 +32,6 @@ const styles = StyleSheet.create({
     marginLeft: 8
   },
   BarcodeListBtnWrap: {
-    display: 'flex',
     flexDirection: 'row'
   },
   BarcodeListBtn: {
@@ -46,7 +44,7 @@ const styles = StyleSheet.create({
     margin: 8,
     fontWeight: 'bold'
   }
-})
+});
 
 class BarcodeList extends Component {
   constructor(props){
@@ -91,7 +89,7 @@ class BarcodeList extends Component {
         barcode: [...state.barcode, {id: id, text: text}]
       };
     }
-  }
+  };
 
   onDelete = (id) => {
     const barcodeListFiltered = this.state.barcode.filter( barcode => barcode.id !== id )
@@ -103,7 +101,7 @@ class BarcodeList extends Component {
     }catch (error){
       console.log('setValues', error)
     }
-  }
+  };
 
   onEdit = (id, text) => {
     try {
@@ -120,12 +118,12 @@ class BarcodeList extends Component {
     }catch (error){
       console.log('setValues', error)
     }
-  }
+  };
 
 
   componentDidMount(){
     this.getValues();
-  }
+  };
 
   getValues = async () => {
     try {
@@ -139,9 +137,9 @@ class BarcodeList extends Component {
     } catch (error) {
       console.log('get error')
     }
-  }
+  };
 
-  deteleAll = () => {
+  deleteAll = () => {
     this.setState( prevState => ({
       animIsPlaying: true
     }));
@@ -164,7 +162,7 @@ class BarcodeList extends Component {
     }catch (error){
       console.log('deleteValues', error)
     }
-  }
+  };
 
   render() {
 
@@ -182,7 +180,7 @@ class BarcodeList extends Component {
           />
           <Button
             title="Очистить весь список"
-            onPress={this.deteleAll}
+            onPress={this.deleteAll}
           />
         </ScrollView>
       }else{
