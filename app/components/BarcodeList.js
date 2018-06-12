@@ -169,7 +169,7 @@ class BarcodeList extends Component {
     const getBody = () => {
       if( this.state.barcode.length ){
         if( this.state.animIsPlaying )
-          return <LottieView source={require('../lottie/success.json')} progress={this.state.progress} />
+          return <LottieView source={require('../resource/lottie/success.json')} progress={this.state.progress} />
         return <ScrollView>
           <FlatList
             data={ this.state.barcode }

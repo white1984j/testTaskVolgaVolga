@@ -39,7 +39,7 @@ class Vk extends Component{
           </View>
           <View style={styles.personal} >
             <TouchableOpacity onPress={() => {}} underlayColor="#e0e0e0">
-              <Image source={require('../img/VkPersonal.jpg')} style={styles.personalImg} />
+              <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalImg} />
             </TouchableOpacity>
             <View>
               <Text style={styles.personalName}>Zhenya Bely</Text>
@@ -61,25 +61,25 @@ class Vk extends Component{
           <View style={styles.personalPhoto} >
             <ScrollView horizontal >
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
               <TouchableHighlight onPress={() => {}} style={styles.personalPhotoPath} underlayColor="gray" >
-                <Image source={require('../img/VkPersonal.jpg')} style={styles.personalPhotoImg} />
+                <Image source={require('../resource/VkPersonal.jpg')} style={styles.personalPhotoImg} />
               </TouchableHighlight>
             </ScrollView>
           </View>

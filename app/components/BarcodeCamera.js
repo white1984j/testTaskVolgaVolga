@@ -52,7 +52,7 @@ export default class BarcodeScan extends Component {
       });
     };
     // If the audio is a 'require' then the second parameter must be the callback.
-    const sound = new Sound(require('../sounds/soundCamera.mp3'), error => callback(error, sound));
+    const sound = new Sound(require('../resource/soundCamera.mp3'), error => callback(error, sound));
      
   };
 
