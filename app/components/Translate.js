@@ -12,6 +12,8 @@ import {
 
 import {reqTranslate} from '../actions';
 
+import PropTypes from 'prop-types';
+
 class Translate extends Component{
   constructor(props){
     super(props);
@@ -63,6 +65,10 @@ class Translate extends Component{
     );
   };
 };
+
+Translate.propTypes = {
+  state: PropTypes.string
+}
 
 const styles = StyleSheet.create({
   container: {

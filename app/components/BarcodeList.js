@@ -200,5 +200,4 @@ class BarcodeList extends Component {
 
 
 
-
 export default BarcodeList;

@@ -10,6 +10,7 @@ import {
   TextInput
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types';
 
 class BarcodeListItem extends Component{
 	constructor(props){
@@ -27,7 +28,6 @@ class BarcodeListItem extends Component{
 	};
 
 	render(){
-		console.log('render list', this.state);
 		return( <View style={styles.BarcodeListItem}>
         { this.state.edit 
           ? <TextInput style={styles.BarcodeListText} onChangeText={(text) => this.setState({text: text})} >{this.state.text}</TextInput>
@@ -44,6 +44,13 @@ class BarcodeListItem extends Component{
 		)
 	};
 };
+
+BarcodeListItem.propTypes = {
+  text: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onEdit: PropTypes.func.isRequired
+}
 
 const styles = StyleSheet.create({
   BarcodeListItem: {

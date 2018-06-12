@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "lottie-react-native": "^2.3.2",
+    "prop-types": "^15.6.1",
     "react": "^16.4.0",
     "react-devtools": "^3.2.3",
     "react-native": "0.55.4",
