@@ -17,6 +17,8 @@ buildscript {
     }
 }
 
+def googlePlayServicesVersion = '11.8.0'
+
 allprojects {
     repositories {
         mavenLocal()
@@ -31,6 +33,20 @@ allprojects {
             url "$rootDir/../node_modules/react-native/android"
         }
     }
+    configurations.all {
+                resolutionStrategy {
+                force "com.google.firebase:firebase-messaging:$googlePlayServicesVersion"
+                force "com.google.firebase:firebase-core:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-ads:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-vision:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-base:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-maps:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-gcm:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-analytics:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-location:$googlePlayServicesVersion"
+                force "com.google.android.gms:play-services-auth:$googlePlayServicesVersion"
+                }
+            }
 }
 
 subprojects {
@@ -42,14 +58,14 @@ subprojects {
             }
         }
     }
-    
-    afterEvaluate { 
-        project -> if (project.hasProperty("android")) { 
-            android { 
-                compileSdkVersion 27 
-                buildToolsVersion '27.0.3' 
-            } 
-        } 
-    } 
+
+    afterEvaluate {
+        project -> if (project.hasProperty("android")) {
+            android {
+                compileSdkVersion 27
+                buildToolsVersion '27.0.3'
+            }
+        }
+    }
 }
 
