@@ -32,7 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
             new RNSoundPackage(),
             new VectorIconsPackage(),
             new RNCameraPackage(),
-            new LottiePackage()
+            new LottiePackage(),
+            new FIRMessagingPackage()
       );
     }
 
@@ -51,5 +52,11 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
+  }
+
+  @Override
+  public void onCreate() { // <-- Check this block exists
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false); // <-- Check this line exists within the block
   }
 }
