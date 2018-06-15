@@ -18,6 +18,10 @@ import com.airbnb.android.react.lottie.LottiePackage;
 import java.util.Arrays;
 import java.util.List;
 
+import com.smixx.fabric.FabricPackage;
+import com.crashlytics.android.Crashlytics;
+import io.fabric.sdk.android.Fabric;
+
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -34,7 +38,8 @@ public class MainApplication extends Application implements ReactApplication {
             new VectorIconsPackage(),
             new RNCameraPackage(),
             new LottiePackage(),
-            new FIRMessagingPackage()
+            new FIRMessagingPackage(),
+            new FabricPackage()
       );
     }
 
@@ -53,5 +58,7 @@ public class MainApplication extends Application implements ReactApplication {
   public void onCreate() { // <-- Check this block exists
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false); // <-- Check this line exists within the block
+
+    Fabric.with(this, new Crashlytics());
   }
 }
