@@ -14,16 +14,9 @@ import {
 //import Icon from 'react-native-vector-icons/FontAwesome';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import Fabric from 'react-native-fabric';
-
-var { Crashlytics } = Fabric;
-
-
-
 
 class Vk extends Component{
   render(){
-    Crashlytics.crash();
     return(
       <ScrollView  >
         <View style={styles.container}>
