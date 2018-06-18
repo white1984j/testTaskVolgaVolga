@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 12,
     paddingRight: 12,
-    backgroundColor: '#DEE5EB'
+    backgroundColor: '#DEE5EB',
   },
   sectionTitleName: {
     color: '#657e9b',
@@ -212,7 +212,8 @@ const styles = StyleSheet.create({
   },
   topLineName: {
     fontSize: 18,
-    color: '#fff'
+    color: '#fff',
+    fontFamily: "EaterRegular"
   },
   topLinePath: {
     flexDirection: 'row',
